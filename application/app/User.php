@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username'
+        'name', 'email', 'password', 'username', 'avatar',
     ];
 
     /**
@@ -36,7 +36,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Gives the exact role of the user
+     * Get the title of the role.
      *
      * @return mixed
      */
@@ -44,7 +44,7 @@ class User extends Authenticatable
     {
         foreach($this->roles as $role)
         {
-            $r = $role->name;
+            $r = $role['name'];
         }
         return $r;
     }
@@ -59,11 +59,58 @@ class User extends Authenticatable
         $roles = $this->roles;
         foreach($roles as $role)
         {
-            if($r === $role->name)
+            if($r === $role['name'])
             {
                 return true;
             }
         }
         return false;
     }
+
+    /**
+     * The grades that belong to a user
+     */
+    public function grades()
+    {
+        return $this->belongsToMany('App\Grade');
+    }
+
+    /**
+     * Gives
+     * @return bool / string
+     */
+    public function grade()
+    {
+        if(count($this->grades) > 0){
+            foreach($this->grades as $grade)
+            {
+                $g = $grade['name'];
+            }
+            return $g;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Has a single user detail
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function detail()
+    {
+        return $this->hasOne('App\UserDetail');
+    }
+
+    public function address()
+    {
+        return $this->hasMany('App\UserAddress');
+    }
+
+    public function current_address()
+    {
+        return $this->address()->where('current', '1');
+    }
+
 }

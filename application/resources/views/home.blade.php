@@ -18,20 +18,22 @@
                         <b>Name: </b>{{Auth::user()->name}}<br>
                         <b>Email: </b>{{Auth::user()->email}}<br>
                         <b>Role: </b> {{Auth::user()->role()}}<br>
-                        <b>Grade: </b><br>
-                        <b>Date of Birth: </b><br>
-                        <b>Gender: </b><br>
-                        <b>Avatar: </b><br>
+                        @if(Auth::user()->hasRole('student')) <b>Grade: </b>{{ ucfirst(Auth::user()->grade())}}<br> @endif
+                        <b>Date of Birth:  </b> {{ Auth::user()->detail->birthday }} <br>
+                        <b>Gender: </b> @if(Auth::user()->detail->gender == "M") Male @elseif(Auth::user()->detail->gender == "F") Female @else Other @endif  <br>
+                        <b>Avatar: </b>{{ Auth::user()->avatar }}<br>
                         <b>Address: </b><br>
                         <table class="table table-bordered">
+                            @foreach(Auth::user()->address as $a)
                             <tr>
-                                <td>Country</td>
-                                <td>State</td>
-                                <td>City</td>
-                                <td>municipality </td>
-                                <td>locality</td>
-                                <td>current</td>
+                                <td>{{ \App\Helpers\Country\Country::countryName($a->country) }}</td>
+                                <td>{{ $a->state}}</td>
+                                <td>{{ $a->city }} </td>
+                                <td>{{ $a->address1 }}</td>
+                                <td>{{ $a->address2 }}</td>
+                                <td>@if($a->current === 1)True @else False @endif</td>
                             </tr>
+                            @endforeach
                         </table>
                         <br>
                         <b>Phone: </b><br>
