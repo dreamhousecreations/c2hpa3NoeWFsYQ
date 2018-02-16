@@ -16,9 +16,64 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/register', function() {
+	abort(404);
+});
 
-Route::get('/test', function (){
-    return "Hello World";
+/**
+ *  Admin Authentication Routes
+ */
+Route::group(['prefix'  => 'admin'], function () {
+	//show login page
+	Route::get('/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+	//post login data
+	Route::post('/login', 'Admin\Auth\LoginController@login');
+	//post logout
+	Route::post('/logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
+	//show password reset link form
+	Route::get('/password/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm' )->name('admin.password.request');
+	//post password reset email
+	Route::post('/password/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+	//get password reset form
+	Route::get('/password/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
+	//post password reset data
+	Route::post('password/reset', 'Admin\Auth\ResetPasswordController@reset');
+});
+
+/**
+ *  Teacher Authentication Routes
+ */
+Route::group(['prefix'  => 'teacher'], function () {
+	//show login page
+	Route::get('/login', 'Teacher\Auth\LoginController@showLoginForm')->name('teacher.login');
+	//post login data
+	Route::post('/login', 'Teacher\Auth\LoginController@login');
+	//post logout
+	Route::post('/logout', 'Teacher\Auth\LoginController@logout')->name('teacher.logout');
+	//show password reset link form
+	Route::get('/password/reset', 'Teacher\Auth\ForgotPasswordController@showLinkRequestForm' )->name('teacher.password.request');
+	//post password reset email
+	Route::post('/password/email', 'Teacher\Auth\ForgotPasswordController@sendResetLinkEmail')->name('teacher.password.email');
+	//get password reset form
+	Route::get('/password/reset/{token}', 'Teacher\Auth\ResetPasswordController@showResetForm')->name('teacher.password.reset');
+	//post password reset data
+	Route::post('password/reset', 'Teacher\Auth\ResetPasswordController@reset');
+});
+
+
+/**
+ *  Admin Routes
+ */
+
+Route::group(['prefix' => 'admin'], function () {
+	Route::get('/', 'Admin\HomeController@index');
+});
+
+/**
+ *  Teacher Routes
+ */
+
+Route::group(['prefix' => 'teacher'], function () {
+	Route::get('/', 'Teacher\HomeController@index');
 });

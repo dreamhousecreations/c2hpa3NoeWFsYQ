@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class AdminsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
+        App\Models\Admin::create([
         	'name' => 'Shekhar Khatri',
         	'email' => 'shekharkhatri016@gmail.com',
         	'username' => 'shekharkhatri',
