@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'User\HomeController@index')->name('home');
 Route::any('/register', function() {
 	abort(404);
 });
@@ -104,4 +101,10 @@ Route::group(['prefix' => 'teacher'], function () {
 
 Route::group(['prefix' => 'guardian'], function () {
 	Route::get('/', 'Guardian\HomeController@index');
+});
+
+
+//Design Testing Route
+Route::get('/test-login', function () {
+	return view('test.login');
 });
