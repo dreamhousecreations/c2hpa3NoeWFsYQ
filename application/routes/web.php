@@ -61,6 +61,26 @@ Route::group(['prefix'  => 'teacher'], function () {
 	Route::post('password/reset', 'Teacher\Auth\ResetPasswordController@reset');
 });
 
+/**
+ *  Guardian Authentication Routes
+ */
+Route::group(['prefix'  => 'guardian'], function () {
+	//show login page
+	Route::get('/login', 'Guardian\Auth\LoginController@showLoginForm')->name('guardian.login');
+	//post login data
+	Route::post('/login', 'Guardian\Auth\LoginController@login');
+	//post logout
+	Route::post('/logout', 'Guardian\Auth\LoginController@logout')->name('guardian.logout');
+	//show password reset link form
+	Route::get('/password/reset', 'Guardian\Auth\ForgotPasswordController@showLinkRequestForm' )->name('guardian.password.request');
+	//post password reset email
+	Route::post('/password/email', 'Guardian\Auth\ForgotPasswordController@sendResetLinkEmail')->name('guardian.password.email');
+	//get password reset form
+	Route::get('/password/reset/{token}', 'Guardian\Auth\ResetPasswordController@showResetForm')->name('guardian.password.reset');
+	//post password reset data
+	Route::post('password/reset', 'Guardian\Auth\ResetPasswordController@reset');
+});
+
 
 /**
  *  Admin Routes
@@ -76,4 +96,12 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'teacher'], function () {
 	Route::get('/', 'Teacher\HomeController@index');
+});
+
+/**
+ *  Guardian Routes
+ */
+
+Route::group(['prefix' => 'guardian'], function () {
+	Route::get('/', 'Guardian\HomeController@index');
 });

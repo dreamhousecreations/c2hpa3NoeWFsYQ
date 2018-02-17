@@ -45,6 +45,7 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -54,6 +55,7 @@ return [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+
         'teacher' => [
             'driver' => 'session',
             'provider' => 'teachers',
@@ -63,6 +65,17 @@ return [
             'driver' => 'token',
             'provider' => 'teachers',
         ],
+
+        'guardian' => [
+            'driver' => 'session',
+            'provider' => 'guardians',
+        ],
+        
+        'guardian-api' => [
+            'driver' => 'token',
+            'provider' => 'guardians',
+        ],
+
     ],
 
     /*
@@ -94,6 +107,10 @@ return [
         'teachers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
+        ],
+        'guardians' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guardian::class,
         ],
 
         // 'users' => [
