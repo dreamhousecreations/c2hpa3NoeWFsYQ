@@ -14,6 +14,7 @@
 
 Auth::routes();
 Route::get('/', 'User\HomeController@index')->name('home');
+Route::get('/classroom/{classroom}', 'User\ClassroomController@showClassroom');
 Route::any('/register', function() {
 	abort(404);
 });
