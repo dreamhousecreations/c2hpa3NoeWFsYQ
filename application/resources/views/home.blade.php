@@ -14,7 +14,13 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <b>Classrooms:</b>
+                    <ul>
+                        @foreach(Auth::user()->classrooms as $classroom)
+                        <li>{{$classroom->slug}}</li>
+                        @endforeach
+                    </ul>
+
                 </div>
             </div>
         </div>

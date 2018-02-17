@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'active'
+        'name', 'email', 'password', 'username', 'active', 'grade_id'
     ];
 
     /**
@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Grade related to Model
+     * @return mixed Relationship instance.
+     */
+    public function grade()
+    {
+        return $this->belongsTo('App\Models\Grade');
+    }
+
+    public function classrooms()
+    {
+        $grade = \App\Models\Grade::find($this->grade->id);
+        return $grade->classrooms();
+    }
+
 }
