@@ -24,7 +24,13 @@ class GradesTableSeeder extends Seeder
             factory(App\Models\Topic::class, 10)
             ->create([
                 'classroom_id' => $classroom->id,
-            ]);
+            ])
+            ->each(function(App\Models\Topic $topic) {
+                factory(App\Models\Subtopic::class, 3)
+                ->create([
+                    'topic_id' => $topic->id,
+                ]);
+            });
             $classroom = $grade->classrooms()->create([
                 'name' => 'Nepali',
                 'slug' => 'nepali'. $grade->name,
@@ -33,7 +39,13 @@ class GradesTableSeeder extends Seeder
             factory(App\Models\Topic::class, 10)
             ->create([
                 'classroom_id' => $classroom->id,
-            ]);
+            ])
+            ->each(function(App\Models\Topic $topic) {
+                factory(App\Models\Subtopic::class, 3)
+                ->create([
+                    'topic_id' => $topic->id,
+                ]);
+            });
             $classroom = $grade->classrooms()->create([
                 'name' => 'Mathematics',
                 'slug' => 'mathematics'. $grade->name,
@@ -42,7 +54,13 @@ class GradesTableSeeder extends Seeder
             factory(App\Models\Topic::class, 10)
             ->create([
                 'classroom_id' => $classroom->id,
-            ]);
+            ])
+            ->each(function(App\Models\Topic $topic) {
+                factory(App\Models\Subtopic::class, 3)
+                ->create([
+                    'topic_id' => $topic->id,
+                ]);
+            });
         }
     }
 }

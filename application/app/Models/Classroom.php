@@ -28,4 +28,9 @@ class Classroom extends Model
     {
         return $this->hasMany('App\Models\Topic');
     }
+
+    public function subtopics()
+    {
+        return $this->hasManyThrough('App\Models\Subtopic', 'App\Models\Topic');
+    }
 }
