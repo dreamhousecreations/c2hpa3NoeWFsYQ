@@ -19,4 +19,13 @@ class Classroom extends Model
     {
     	return $this->belongsTo('App\Models\Grade');
     }
+
+    /**
+     * Topics related to Model
+     * @return mixed Relationship Instance
+     */
+    public function topics()
+    {
+        return $this->hasMany('App\Models\Topic');
+    }
 }

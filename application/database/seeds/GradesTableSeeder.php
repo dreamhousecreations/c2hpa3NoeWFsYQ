@@ -16,20 +16,32 @@ class GradesTableSeeder extends Seeder
                 'name' => $x,
                 'description' => 'Grade ' . $x,
             ]);
-            $grade->classrooms()->create([
+            $classroom = $grade->classrooms()->create([
                 'name' => 'English',
                 'slug' => 'english'. $grade->name,
                 'description' => 'Grade '. $grade->name .' Subject English',
             ]);
-            $grade->classrooms()->create([
+            factory(App\Models\Topic::class, 10)
+            ->create([
+                'classroom_id' => $classroom->id,
+            ]);
+            $classroom = $grade->classrooms()->create([
                 'name' => 'Nepali',
                 'slug' => 'nepali'. $grade->name,
                 'description' => 'Grade '. $grade->name .' Subject Nepali',
             ]);
-            $grade->classrooms()->create([
+            factory(App\Models\Topic::class, 10)
+            ->create([
+                'classroom_id' => $classroom->id,
+            ]);
+            $classroom = $grade->classrooms()->create([
                 'name' => 'Mathematics',
                 'slug' => 'mathematics'. $grade->name,
                 'description' => 'Grade '. $grade->name .' Subject Mathematics',
+            ]);
+            factory(App\Models\Topic::class, 10)
+            ->create([
+                'classroom_id' => $classroom->id,
             ]);
         }
     }
